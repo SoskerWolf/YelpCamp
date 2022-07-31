@@ -1,0 +1,29 @@
+header{
+    background: url(https://i.pinimg.com/originals/64/05/31/6405318ac146473a95bfbdcec2b32943.gif);
+    background-size: cover;
+    background-position: bottom;
+    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    color: white;
+    padding: 20px;
+}
+.maquina{
+    display: block;
+    font-family: monospace;
+    white-space: nowrap;
+    width: fit-content;
+    border-right: 2px solid;
+    animation: maquina 10s steps(57), blink 0.5s infinite step-end alternate;
+    overflow: hidden;
+}
+@keyframes maquina {
+    from{
+        width: 0%;
+    }
+    to{
+        width: 100%;
+    }
+}
+@keyframes blink {
+    50%{border-color: transparent;}
+}

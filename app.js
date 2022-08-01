@@ -1,50 +1,53 @@
-var express = require("express");
-var app = express();
-var mongoose = require('mongoose');
-var bodyParser = require("body-parser");
-var db = require('./db');
-var model = require('./models/user');
-
-
-//Database
+var express     = require("express"),
+    app         = express(),
+    bodyParser  = require("body-parser");
+// Database
+var mongoose    = require('mongoose'),
+    db          = require('./db'),
+    Campground  = require('./models/user');
 db();
+
 
 app.use(bodyParser.urlencoded({extended : true}));
 app.set("view engine", "ejs");
-
 app.use(express.static('views/partials'));
 
+//HOME
 app.get("/", function(req, res){
     res.render("landing");
 });
 
+//INDEX - Show all Campgrounds
 app.get("/campgrounds", function(req, res){
-    model.find({},function(err, users){
+    //Get all campgrounds from DB
+    Campground.find({},function(err, allCampgrounds){
         if(err){
             console.log('Error al traer los usuarios');
         } else {
             console.log('Todos los usuarios');
-            res.render("campgrounds",{campgrounds:users});
+            res.render("index",{campgrounds:allCampgrounds});
         }
     });
 });
 
+//NEW - Show form to create campground new
 app.get("/campgrounds/new", function(req, res){
     res.render("new.ejs");
 });
 
+// CREATE - Add new campground to DB
 app.post("/campgrounds", function(req, res){
     // get data from form and add to campgrounds array
     let aux;
     if(req.body.image!=""){
         aux=req.body.image;
     }
-    let user = new model({
+    let camp = new Campground({
         name: req.body.name,
-        image: aux
+        image: aux,
+        description: req.body.description
     });
-
-    user.save(function(err, users){
+    camp.save(function(err, users){
         if(err){
             console.log('Error Save!!');
         } else {
@@ -53,6 +56,20 @@ app.post("/campgrounds", function(req, res){
     });
     //redirect bak to campgrounds page
     res.redirect("/campgrounds");
+});
+
+//SHOW - Show a campground
+app.get("/campgrounds/:id", function(req, res){
+    //find the camground with provided ID
+    Campground.findById(req.params.id, function(err, foundCampground){
+        if(err){
+            console.log(err);
+        } else {
+            console.log(foundCampground.name);
+            //read show template with that campground
+            res.render("show", {campground:foundCampground});
+        }
+    });
 });
 
 const PORT = 3000;

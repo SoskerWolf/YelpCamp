@@ -24,3 +24,33 @@ Each Campground has:
 #Style the navbar and Form
 * Add a navbar to all templates
 * Style the new campground form
+
+------------ v2.0 --------------
+#Database
+
+##Intro to Databases
+* What is a database?
+    * A collection of information/data
+    * Has an interface
+* SQL(relational) vs. NoSQL(non-relational)
+
+#Intro to MongoDB
+* What is MongoDB?
+* Why are we using it?
+* Let's Install It!
+
+#Our First Mongo Commands
+* mongod
+* mongosh
+* help
+* show dbs
+* use
+* insert
+* find
+* update
+* remove
+
+#Mongoose
+* What Is Mongoose?
+* Why are we using it?
+* Interact with a Mongo Database using Mongoose

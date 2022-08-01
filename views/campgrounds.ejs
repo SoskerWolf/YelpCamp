@@ -17,7 +17,7 @@
         </div>
         <% campgrounds.forEach(function(campground){ %>
             <div class="card" style="width: 15rem; margin: 15px;">
-                <img src="<%= campground.image %>" class="card-img-top" style="border-radius: 5px; margin-top: 10px;">
+                <img src="<%= campground.image %>" class="card-img-top" style="border-radius: 5px; margin-top: 10px; height: 210px; object-fit: cover;">
                 <div class="card-body">
                     <h5><%=campground.name %></h5> 
                 </div>
